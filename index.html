@@ -1,0 +1,672 @@
+<html>
+  <head>
+    <title> Canvas </title>
+    <style type="text/css">
+      body, html { font-family:helvetica,arial,sans-serif; font-size:90%; }
+      #borderContainer { width: 100%; height: 100%} 
+     canvas { width: 100%; height: 100%; margin: 0 ; padding :0 } 
+      #navMenu { margin: 0 } 
+      #contentPaneTop { border: 1px solid blue ; padding :0}
+      #contentPaneCenter { border: 1px solid blue ; padding :0}
+    </style>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dojo/dojo.xd.js"
+	    djConfig="parseOnLoad:true"></script>  
+
+
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dijit/themes/claro/claro.css" /> 
+
+
+  </head>
+  <body class="claro"  onload="init()"  >
+<div style="{text-align: left }">
+<link rel="stylesheet" type="text/css" href="/nfs/prog/Ymacs/test/dl/new-theme/default.css" />
+<link rel="stylesheet" type="text/css" href="/nfs/prog/Ymacs/src/css/ymacs.css" />
+<link rel="stylesheet" type="text/css" href="/nfs/prog/Ymacs/test/test.css" />
+<!-- <center style="margin-top: 10em" id="x-loading">
+   <h1><tt>.oO[ loading ]Oo.</tt></h1>
+</center> -->
+<script>
+   window.Dynarch_Base_Url = "/nfs/prog/Ymacs/test/dl";
+   window.YMACS_SRC_PATH = "/nfs/prog/Ymacs/src/js/";
+</script>
+    <script src="/nfs/prog/Ymacs/test/dl/js/thelib.js"></script> 
+    <!-- <script src="http://www.jstoolkit.com.d:8090/src/js/all-scripts.jsx?crunch=0;path=http://www.jstoolkit.com.d:8090/src/js"></script> -->
+    <script src="/nfs/prog/Ymacs/src/js/ymacs.js"></script>
+    <script src="/nfs/prog/Ymacs/src/js/ymacs-keyboard.js"></script>
+    <script src="/nfs/prog/Ymacs/src/js/ymacs-regexp.js"></script>
+    <script src="/nfs/prog/Ymacs/src/js/ymacs-frame.js"></script>
+    <script src="/nfs/prog/Ymacs/src/js/ymacs-textprop.js"></script>
+    <script src="/nfs/prog/Ymacs/src/js/ymacs-exception.js"></script>
+    <script src="/nfs/prog/Ymacs/src/js/ymacs-interactive.js"></script>
+    <script src="/nfs/prog/Ymacs/src/js/ymacs-buffer.js"></script>
+    <script src="/nfs/prog/Ymacs/src/js/ymacs-marker.js"></script>
+    <script src="/nfs/prog/Ymacs/src/js/ymacs-commands.js"></script>
+    <script src="/nfs/prog/Ymacs/src/js/ymacs-commands-utils.js"></script>
+    <script src="/nfs/prog/Ymacs/src/js/ymacs-keymap.js"></script>
+    <script src="/nfs/prog/Ymacs/src/js/ymacs-keymap-emacs.js"></script>
+    <script src="/nfs/prog/Ymacs/src/js/ymacs-keymap-isearch.js"></script>
+    <script src="/nfs/prog/Ymacs/src/js/ymacs-minibuffer.js"></script>
+    <script src="/nfs/prog/Ymacs/src/js/ymacs-tokenizer.js"></script>
+    <script src="/nfs/prog/Ymacs/src/js/ymacs-mode-paren-match.js"></script>
+    <script src="/nfs/prog/Ymacs/src/js/ymacs-mode-lisp.js"></script>
+    <script src="/nfs/prog/Ymacs/src/js/ymacs-mode-js.js"></script>
+    <script src="/nfs/prog/Ymacs/src/js/ymacs-mode-xml.js"></script>
+    <script src="/nfs/prog/Ymacs/src/js/ymacs-mode-css.js"></script>
+    <script src="/nfs/prog/Ymacs/src/js/ymacs-mode-markdown.js"></script> 
+    <div style="display: none">
+      <div id="browser-warning" style="padding: 1em; width: 20em;">
+        <b>Note that Ymacs is only tested with Firefox for now.</b><br /><br />
+        This is mentioned on the <a href="http://www.ymacs.org/"
+        target="_blank">project page</a>,
+        but I just thought I'd say it again.
+      </div>
+    </div>
+    <script src="/nfs/prog/Ymacs/test/test.js"></script>
+</div>
+
+
+   <div dojoType="dijit.layout.BorderContainer" design="sidebar" id="borderContainer"> 
+     <div dojoType="dijit.layout.ContentPane" region="top" id="contentPaneTop"> 
+
+      <div dojoType="dijit.MenuBar" id="navMenu" >
+	<div dojoType="dijit.PopupMenuBarItem">
+          <span>
+            File
+          </span>
+          <div dojoType="dijit.Menu" id="fileMenu">
+            <div dojoType="dijit.MenuItem" onClick="alert('New')">
+	      New
+            </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Annotate PDF')">
+	      Annotate PDF
+            </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Open')">
+	      Open
+            </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Save')">
+	      Save
+            </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Save As')">
+	      Save As
+            </div>
+	    <div dojoType="dijit.MenuSeparator"> </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Recent Documents')">
+	      Recent Documents
+            </div>
+	    <div dojoType="dijit.MenuSeparator"> </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Print')">
+	      Print
+            </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Export To PDF')">
+	      Export To PDF
+            </div>
+	    <div dojoType="dijit.MenuSeparator"> </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Quit')">
+	      Quit
+            </div>
+          </div>
+	</div>
+	<div dojoType="dijit.PopupMenuBarItem">
+          <span>
+            Edit
+          </span>
+          <div dojoType="dijit.Menu" id="editMenu">
+            <div dojoType="dijit.MenuItem" onClick="alert('Undo')" disabled="true">
+	      Undo
+            </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Redo')" disabled="true">
+	      Redo
+            </div>
+	    <div dojoType="dijit.MenuSeparator"> </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Cut')" disabled="true">
+	      Cut
+            </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Copy')" disabled="true">
+	      Copy
+            </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Paste')" disabled="true">
+	      Paste
+            </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Delete')" disabled="true">
+	      Delete
+            </div>
+          </div>
+	</div>
+	<div dojoType="dijit.PopupMenuBarItem">
+          <span>
+            View
+          </span>
+          <div dojoType="dijit.Menu" id="viewMenu">
+            <div dojoType="dijit.CheckedMenuItem" onClick="alert('Continuous')">
+	      Continuous
+            </div>
+            <div dojoType="dijit.CheckedMenuItem" onClick="alert('One Page')">
+	      One Page
+            </div>
+	    <div dojoType="dijit.MenuSeparator"> </div>
+            <div dojoType="dijit.CheckedMenuItem" onClick="alert('Full Screen')">
+	      Full Screen
+            </div>
+	    <div dojoType="dijit.MenuSeparator"> </div>
+	    <div dojoType="dijit.PopupMenuItem">
+	      <span>
+		Zoom
+	      </span>
+	      <div dojoType="dijit.Menu" id="zoomMenu">
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('Zoom In')">
+		  Zoom In
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('Zoom Out')">
+		  Zoom Out
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('Normal Size')">
+		  Normal Size
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('Page Width')">
+		  Page Width
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('Set Zoom')">
+		  Set Zoom
+		</div>
+	      </div>
+	    </div> 
+	    <div dojoType="dijit.MenuSeparator"> </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('First Page')" disabled="true">
+	      First Page
+            </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Previous Page')" disabled="true">
+	      Previous Page
+            </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Next Page')">
+	      Next Page
+            </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Last Page')" disabled="true">
+	      Last Page
+            </div>
+	    <div dojoType="dijit.MenuSeparator"> </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Show Layer')" disabled="true">
+	      Show Layer
+            </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Hide Layer')">
+	      Hide Layer
+            </div>
+	  </div>
+	</div>
+	<div dojoType="dijit.PopupMenuBarItem">
+          <span>
+            Journal
+          </span>
+          <div dojoType="dijit.Menu" id="journalMenu">
+            <div dojoType="dijit.MenuItem" onClick="alert('New Page Before')">
+              New Page Before
+            </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('New Page After')">
+              New Page After
+            </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('New Page At End')">
+              New Page At End
+            </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Delete Page')">
+              Delete Page
+            </div>
+	    <div dojoType="dijit.MenuSeparator"> </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('New Layer')">
+              New Layer
+            </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Delete Layer')">
+              Delete Layer
+            </div>
+	    <div dojoType="dijit.MenuSeparator"> </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Page Size')">
+              Page Size
+            </div>
+	    <div dojoType="dijit.PopupMenuItem">
+	      <span>
+		Page Color
+	      </span>
+              <div dojoType="dijit.Menu" id="pageColorMenu">
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('white paper')">
+		  white paper
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('yellow paper')">
+		  yellow paper
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('pink paper')">
+		  pink paper
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('orange paper')">
+		  orange paper
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('blue paper')">
+		  blue paper
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('green paper')">
+		  green paper
+		</div>
+	      </div>
+	    </div>
+	    
+	    <div dojoType="dijit.PopupMenuItem">
+	      <span>
+		Page Style
+	      </span>
+              <div dojoType="dijit.Menu" id="pageStyleMenu">
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('fine')">
+		  plain
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('fine')">
+		  lined
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('fine')">
+		  ruled
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('fine')">
+		  graph
+		</div>
+	      </div>
+	    </div>
+            <div dojoType="dijit.CheckedMenuItem" onClick="alert('Apply To All Pages')">
+              Apply To All Pages
+            </div>
+	    <div dojoType="dijit.MenuSeparator"> </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Load Background')">
+              Load Background
+            </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Background Screenshot')">
+              Background Screenshot
+            </div>
+	    <div dojoType="dijit.MenuSeparator"> </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Default Paper')">
+              Default Paper
+            </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Set As Default')">
+              Set As Default
+            </div>
+	  </div>
+	</div>
+	<div dojoType="dijit.PopupMenuBarItem">
+          <span>
+            Tools
+          </span>
+          <div dojoType="dijit.Menu" id="toolsMenu">
+            <div dojoType="dijit.CheckedMenuItem" onClick="alert('Pen')">
+              Pen
+            </div>
+            <div dojoType="dijit.CheckedMenuItem" onClick="alert('Eraser')">
+              Eraser
+            </div>
+            <div dojoType="dijit.CheckedMenuItem" onClick="alert('Highlight')">
+              Highlight
+            </div>
+            <div dojoType="dijit.CheckedMenuItem" onClick="alert('Text')">
+              Text
+            </div>
+	    <div dojoType="dijit.MenuSeparator"> </div>
+            <div dojoType="dijit.CheckedMenuItem" onClick="alert('Shape Recognizer')">
+              Shape Recognizer
+            </div>
+            <div dojoType="dijit.CheckedMenuItem" onClick="alert('Ruler')">
+              Ruler
+            </div>
+	    <div dojoType="dijit.MenuSeparator"> </div>
+            <div dojoType="dijit.CheckedMenuItem" onClick="alert('Select Region')">
+              Select Region
+            </div>
+            <div dojoType="dijit.CheckedMenuItem" onClick="alert('Select Rectangle')">
+              Select Rectangle
+            </div>
+            <div dojoType="dijit.CheckedMenuItem" onClick="alert('Vertical Space')">
+              Vertical Space
+            </div>
+            <div dojoType="dijit.CheckedMenuItem" onClick="alert('Hand Tool')">
+              Hand Tool
+            </div>
+	    <div dojoType="dijit.MenuSeparator"> </div>
+	    <div dojoType="dijit.PopupMenuItem">
+	      <span>
+		Color
+	      </span>
+              <div dojoType="dijit.Menu" id="colorMenu">
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('black')">
+		  black
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('blue')">
+		  blue
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('red')">
+		  red
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('green')">
+		  green
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('gray')">
+		  gray
+		</div>
+		<div dojoType="dijit.MenuSeparator"> </div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('light blue')">
+		  light blue
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('light green')">
+		  light green 
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('magenta')">
+		  magenta
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('orange')">
+		  orange
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('yellow')">
+		  yellow
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('white')">
+		  white
+		</div>
+	      </div>
+	    </div> 
+	    <div dojoType="dijit.PopupMenuItem">
+	      <span>
+		Pen Options
+	      </span>
+              <div dojoType="dijit.Menu" id="penOptionsMenu">
+		<div dojoType="dijit.MenuItem" onClick="alert('very fine')">
+		  very fine
+		</div>
+		<div dojoType="dijit.MenuItem" onClick="alert('fine')">
+		  fine 
+		</div>
+		<div dojoType="dijit.MenuItem" onClick="alert('medium')">
+		  medium 
+		</div>
+		<div dojoType="dijit.MenuItem" onClick="alert('thick')">
+		  thick
+		</div>
+		<div dojoType="dijit.MenuItem" onClick="alert('very thick')">
+		  very thick
+		</div>
+	      </div>
+	    </div>
+	    <div dojoType="dijit.PopupMenuItem">
+	      <span>
+		Eraser Options
+	      </span>
+              <div dojoType="dijit.Menu" id="eraserOptionsMenu">
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('fine')">
+		  fine
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('medium')">
+		  medium
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('thick')">
+		  thick
+		</div>
+		<div dojoType="dijit.MenuSeparator"> </div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('standard')">
+		  standard
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('white out')">
+		  white out
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('delete stroke')">
+		  delete strokes
+		</div>
+	      </div>
+	    </div>
+	    <div dojoType="dijit.PopupMenuItem">
+	      <span>
+		Highlighter Options
+	      </span>
+              <div dojoType="dijit.Menu" id="highlighterOptionsMenu">
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('fine')">
+		  fine
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('medium')">
+		  medium
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('thick')">
+		  thick
+		</div>
+	      </div>
+	    </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Text Font')">
+              Text Font...
+            </div>
+	    <div dojoType="dijit.MenuSeparator"> </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Default Pen')">
+              Default Pen
+            </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Default Eraser')">
+              Default Eraser
+            </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Default Highlighter')">
+              Default Highlighter
+            </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Default Text')">
+              Default Text
+            </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Set As Default')">
+              Set As Default
+            </div>
+	  </div>
+	</div>
+	<div dojoType="dijit.PopupMenuBarItem">
+          <span>
+            Options
+          </span>
+          <div dojoType="dijit.Menu" id="optionsMenu">
+            <div dojoType="dijit.CheckedMenuItem" onClick="alert('Use XInput')" disabled="true">
+              Use XInput
+            </div>
+            <div dojoType="dijit.CheckedMenuItem" onClick="alert('Discard Core Events')" disabled="true">
+              Discard Core Events
+            </div>
+            <div dojoType="dijit.CheckedMenuItem" onClick="alert('Eraser Tip')" disabled="true">
+              Eraser Tip
+            </div>
+            <div dojoType="dijit.CheckedMenuItem" onClick="alert('Pressure Sensitivity')" disabled="true">
+              Pressure Sensitivity
+            </div>
+            <div dojoType="dijit.CheckedMenuItem" onClick="alert('Page Highlight')">
+              Page Highlight
+            </div>
+            <div dojoType="dijit.CheckedMenuItem" onClick="alert('Multiple Page View')">
+              Multiple Page View
+            </div>
+	    <div dojoType="dijit.PopupMenuItem" disabled="true">
+              <span>
+		Multiple Pages
+              </span>
+              <div dojoType="dijit.Menu" id="multiplePagesMenu">
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('2 Pages')">
+		  2 pages
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('3 Pages')">
+		  3 pages
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('4 Pages')">
+		  4 pages
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('5 Pages')">
+		  5 pages
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('6 Pages')">
+		  6 pages
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('7 Pages')">
+		  7 pages
+		</div>
+	      </div>
+	    </div>
+	    <div dojoType="dijit.PopupMenuItem">
+	      <span>
+		Button 2 Mapping
+	      </span>
+              <div dojoType="dijit.Menu" id="button2MappingMenu">
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('Pen')">
+		  Pen
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('Eraser')">
+		  Eraser
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('Highlighter')">
+		  Highlighter
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('Text')">
+		  Text
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('Select Region')">
+		  Select Region
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('Select Rectangle')">
+		  Select Rectangle
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('Vertical Space')">
+		  Vertical Space
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('Hand Tool')">
+		  Hand Tool
+		</div>
+		<div dojoType="dijit.MenuSeparator"> </div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('Link To Primary Brush')">
+		  Link To Primary Brush
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('Copy of Current Brush')">
+		  Copy of Current Brush
+		</div>
+              </div>
+	    </div>
+	    <div dojoType="dijit.PopupMenuItem">
+	      <span>
+		Button 3 Mapping
+	      </span>
+              <div dojoType="dijit.Menu" id="button3MappingMenu">
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('Pen')">
+		  Pen
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('Eraser')">
+		  Eraser
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('Highlighter')">
+		  Highlighter
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('Text')">
+		  Text
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('Select Region')">
+		  Select Region
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('Select Rectangle')">
+		  Select Rectangle
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('Vertical Space')">
+		  Vertical Space
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('Hand Tool')">
+		  Hand Tool
+		</div>
+		<div dojoType="dijit.MenuSeparator"> </div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('Link To Primary Brush')">
+		  Link To Primary Brush
+		</div>
+		<div dojoType="dijit.CheckedMenuItem" onClick="alert('Copy of Current Brush')">
+		  Copy of Current Brush
+		</div>
+              </div>
+	    </div> 
+	    <div dojoType="dijit.MenuSeparator"> </div>
+            <div dojoType="dijit.CheckedMenuItem" onClick="alert('Antialiased Bitmaps')">
+              Antialiased Bitmaps
+            </div>
+            <div dojoType="dijit.CheckedMenuItem" onClick="alert('Progressive Background')">
+              Progressive Background
+            </div>
+            <div dojoType="dijit.CheckedMenuItem" onClick="alert('Print Paper Ruling')">
+              Print Paper Ruling
+            </div>
+            <div dojoType="dijit.CheckedMenuItem" onClick="alert('Left-Handed Scrollbar')">
+              Left-Handed Scrollbar
+            </div>
+            <div dojoType="dijit.CheckedMenuItem" onClick="alert('Shorten Menus')">
+              Shorten Menus
+            </div>
+	    <div dojoType="dijit.MenuSeparator"> </div>
+            <div dojoType="dijit.CheckedMenuItem" onClick="alert('Auto-Save Preferences')">
+              Auto-Save Preferences
+            </div>
+            <div dojoType="dijit.MenuItem" onClick="alert('Save Preferences')">
+              Save Preferences
+            </div>
+	  </div>
+	</div>
+	<div dojoType="dijit.PopupMenuBarItem">
+          <span>
+            Help
+          </span>
+          <div dojoType="dijit.Menu" id="helpMenu">
+            <div dojoType="dijit.MenuItem" onClick="alert('About')">
+              About
+            </div>
+	  </div>
+	</div>
+	
+	
+      </div>      
+    </div>
+     <div dojoType="dijit.layout.ContentPane" region="center" id="contentPaneCenter"> 
+<center>     
+<canvas id="tutorial"  layoutAlign="center" <!-- width="640" height="480"--> > </canvas> 
+</center>
+    
+    
+    <!-- -->
+     </div> 
+     </div> 
+  </body>
+  <!-- NOTE: the following script tag is not intended for usage in real
+       world!! it is part of the CodeGlass and you should just remove it when
+       you use the code -->
+  <script type="text/javascript" src="canvas.js" >
+  </script>
+
+  
+  
+
+  
+  <!--
+
+     <body class='claro' onload="init();"> 
+       <script type="text/javascript" src="canvas.js"></script>
+       
+       
+       
+       <canvas id="tutorial" width="640" height="480"> </canvas> 
+       
+
+     </body> 
+
+</body> -->
+</html>
+
+
+<!--  <body onload="init();">
+    <script type="text/javascript" src="./dojo/dojo.js">
+            djConfig="parseOnLoad: true"></script>
+
+
+    <script type="text/javascript" src="canvas.js">
+    </script> -->
+<!--
+    <div onmouseover="showmenu()" onmouseout="hidemenu()" >
+       <b> show menu </b>
+       <div style="display:none;" id="menu">
+       </div>
+    </div> -->
+
+
+<!--
+    <label style="position: absolute; left: 10px; top:10px;"> Name: </label>
+    <input dojoType="dijit.form.TextBox" id="InputText"
+           style="position: absolute; left: 60px; top: 10px;" > </input>
+    <span dojoType="dijit.Tooltip" 
+          connectId="InputText"> Text </span>
+ -->  
