@@ -1,12 +1,12 @@
-dojo.require("dijit.MenuBar"); 
-dojo.require("dijit.PopupMenuBarItem"); 
-dojo.require("dijit.Menu"); 
-dojo.require("dijit.MenuItem"); 
-dojo.require("dijit.PopupMenuItem"); 
-dojo.require("dijit.MenuSeparator"); 
-dojo.require("dijit.CheckedMenuItem"); 
-dojo.require("dijit.layout.ContentPane");
-dojo.require("dijit.layout.BorderContainer");
+//dojo.require("dijit.MenuBar"); 
+//dojo.require("dijit.PopupMenuBarItem"); 
+//dojo.require("dijit.Menu"); 
+//dojo.require("dijit.MenuItem"); 
+//dojo.require("dijit.PopupMenuItem"); 
+//dojo.require("dijit.MenuSeparator"); 
+//dojo.require("dijit.CheckedMenuItem"); 
+//dojo.require("dijit.layout.ContentPane");
+//dojo.require("dijit.layout.BorderContainer");
 
 var canvasScaleX = 1;
 var canvasScaleY = 1; 
@@ -19,6 +19,9 @@ var mousedownenter = false ;
 var tools_mode = "pen"; // 0 SELECT 
                // 1 PEN 
                // 2 ERASE
+
+var color_mode = "black";
+var color_rgb = "rgb(0,0,0)";
 
 //window.onload = 
 window.onresize = function () { 
@@ -41,7 +44,6 @@ window.onresize = function () {
 
 } 
 
-
 function tools_pen() { 
     tools_mode = "pen"; 
     console.log("pen is selected"); 
@@ -59,6 +61,28 @@ function tools_highlighter() {
 function tools_text() { 
     console.log("text is not implemented yet."); 
 }
+
+function color_black() { 
+    color_mode = "black";
+    color_rgb = "rgb(0,0,0)";
+}
+
+function color_green() { 
+    color_mode = "green";
+    color_rgb = "rgb(0,220,0)";
+}
+
+function color_red() { 
+    color_mode = "red";
+    color_rgb = "rgb(220,0,0)";
+}
+
+function color_blue() { 
+    color_mode = "blue";
+    color_rgb = "rgb(0,0,220)";
+}
+
+
 
 getPosition = function (obj) {
     var x = 0, y = 0;
@@ -118,11 +142,20 @@ function init() {
     canvas.addEventListener('mouseup',ev_mouseup,false); 
     canvas.addEventListener('mousedoubleclick',ev_mousedclick,false); 
     
-    draw(); 
+    $("#pen").click(tools_pen);
+    $("#erase").click(tools_erase);
+    $("#black").click(color_black);
+    $("#blue").click(color_blue);
+    $("#red").click(color_red);
+    $("#green").click(color_green);
+    $("#save").click(save);
+    $("#clear").click(clear);
+    clear(); 
 
 
 }
 
+/*
 function draw() {
     console.log('draw event fired'); 
 
@@ -130,17 +163,37 @@ function draw() {
     if (canvas.getContext) { 
 	var ctx = canvas.getContext('2d'); 
 	
-	ctx.fillStyle="rgb(200,0,0)"; 
-	ctx.fillRect (10,10,55,50);
+	// ctx.fillStyle="rgb(200,0,0)"; 
+	// ctx.fillRect (10,10,55,50);
 	
-	ctx.fillStyle ="rgba(0,0,200,0.5)";
-	ctx.fillRect (30,30,55,50);
+	// ctx.fillStyle ="rgba(0,0,200,0.5)";
+	// ctx.fillRect (30,30,55,50);
 
-	ctx.fillStyle ="rgba(0,200,200,0.5)";
-	ctx.fillRect (50,40,55,50);
+	// ctx.fillStyle ="rgba(0,200,200,0.5)";
+	// ctx.fillRect (50,40,55,50);
 
     }
 }
+*/
+
+function save() { 
+    var canvas = document.getElementById('tutorial');
+    var dataURL = canvas.toDataURL(); 
+    document.getElementById("canvasImg").src = dataURL;
+}
+
+function clear() { 
+    var canvas = document.getElementById('tutorial'); 
+    if (canvas.getContext) { 
+      var ctx = canvas.getContext('2d');
+      // var siz = getSize(canvas); 
+      ctx.fillStyle="rgb(255,255,255)";
+      console.log(canvas.width);
+      console.log(canvas.height);
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+    }
+}
+
 
 function ev_mousedclick(ev) { 
     console.log('double clicked'); 
@@ -177,6 +230,7 @@ function ev_mousemove(ev) {
 	var canvas = document.getElementById('tutorial'); 
 	if (canvas.getContext) { 
 	    var ctx = canvas.getContext('2d'); 
+            ctx.strokeStyle = color_rgb; 
 	    ctx.lineTo(x,y) ;  
 	    ctx.stroke(); 	    
 	}
@@ -191,7 +245,5 @@ function ev_mouseup(ev) {
     mousedownenter = false ;
 
     //    console.log(x,y);
-
     //    console.log('mouse button up'); 
-
 } 

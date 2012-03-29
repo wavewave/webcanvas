@@ -4,6 +4,7 @@
 	<title>Memu Demo</title>
 	<link rel="stylesheet" href="memu-0.1.css" type="text/css">
 	<style type="text/css" media="screen">
+                canvas { left: 0px; top: 20px; width: 480px; height: 290px; margin: 0 ; padding :0 } 
 		body {
 			background: #56789a;
 			color: #fff;
@@ -16,8 +17,8 @@
 		.menu-container {
 			margin: 0 auto;
 			padding: 0;
-			height: 506px;
-			width: 721px;
+		        height: 320px; 
+			width: 480px; 
 			background: #fff;
 			border: 1px solid #222;
 		}
@@ -1031,307 +1032,49 @@
 		.sprite-xhtml_valid { width: 16px; height: 16px; background:url(famfamfam/css-sprite.png) no-repeat -0px -15936px; }
 		.sprite-zoom { width: 16px; height: 16px; background:url(famfamfam/css-sprite.png) no-repeat -0px -15952px; }
 		.sprite-zoom_in { width: 16px; height: 16px; background:url(famfamfam/css-sprite.png) no-repeat -0px -15968px; }
-		.sprite-zoom_out { width: 16px; height: 16px; background:url(famfamfam/css-sprite.png) no-repeat -0px -15984px; }
+		.sprite-zoom_out { width: 16px; height: 16px; background:url(famfamfam/css-sprite.png) no-repeat -0px -15984px; } 
 	</style>
 	</head>
-	<body style="margin:0">
-		<br>
-		<br>
-		<center>Example 1 <small>javascript enabled</small></center>
-		<br />
-		<div class="menu-container">
-			<ul class="memu js-enabled">
-				<li class="memu-root">
-					<a href="#">File</a>
-					<ul>
-						<li class="has-children">
-							<a href="sample_2.html"><div class="memu-icon sprite-page_white"></div>New</a>
-							<ul>
-								<li><a href="#"><div class="memu-icon sprite-page_white"></div>Text Document</a></li>
-								<li><a href="#"><div class="memu-icon sprite-script_code"></div>HTML Document</a></li>
-								<li><a href="#"><div class="memu-icon sprite-script_palette"></div>CSS Document</a></li>
-								<li><a href="#"><div class="memu-icon sprite-script"></div>JS Document</a></li>
-								<li><a href="#"><div class="memu-icon sprite-page_white_c"></div>C Document</a></li>
-							</ul>
-						</li>
-						<li><a href="#"><div class="memu-icon sprite-folder"></div>Open...</a></li>
-						<li><a href="#"><div class="memu-icon sprite-disk"></div>Save</a></li>
-						<li><a href="#"><div class="memu-icon sprite-disk_multiple"></div>Save As...</a></li>
-						<li><a href="#"><div class="memu-icon sprite-page_white_edit"></div>Page Setup...</a></li>
-						<li><a href="#"><div class="memu-icon sprite-printer"></div>Print</a></li>
-						<li><a href="#"><div class="memu-icon sprite-delete"></div>Exit</a></li>
-					</ul>
-				</li>
-				<li class="memu-root">
-					<a href="#">Edit</a>
-					<ul>
-						<li><a href="#">Undo</a></li>
-						<li><a href="#">Cut</a></li>
-						<li><a href="#">Copy</a></li>
-						<li><a href="#">Paste</a></li>
-						<li><a href="#">Delete</a></li>
-						<li><a href="#">Find...</a></li>
-						<li><a href="#">Find Next</a></li>
-						<li><a href="#">Replace...</a></li>
-						<li><a href="#">Go To...</a></li>
-						<li><a href="#">Select All</a></li>
-						<li><a href="#">Time/Date</a></li>
-						<li class="has-children">
-							<a href="#">Preferences</a>
-							<ul>
-								<li class="has-children">
-									<a href="#">Text Color</a>
-									<ul>
-										<li><a href="#">Blue</a></li>
-										<li><a href="#">Red</a></li>
-										<li><a href="#">Green</a></li>
-										<li><a href="#">Brown</a></li>
-										<li><a href="#">Orange</a></li>
-									</ul>
-								</li>
-								<li class="has-children">
-									<a href="#">Background</a>
-									<ul>
-										<li><a href="#">Blue</a></li>
-										<li><a href="#">Red</a></li>
-										<li><a href="#">Green</a></li>
-										<li><a href="#">Brown</a></li>
-										<li><a href="#">Orange</a></li>
-									</ul>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</li>
-				<li class="memu-root">
-					<a href="#">Format</a>
-					<ul>
-						<li><a href="#">Word Wrap</a></li>
-						<li><a href="#">Font...</a></li>
-					</ul>
-				</li>
-				<li class="memu-root">
-					<a href="#">View</a>
-					<ul>
-						<li><a href="#">Status Bar</a></li>
-					</ul>
-				</li>
-			</ul>
-			<img src="background.jpg" alt="Background" />
-		</div>
-		<br>
-		<br>
-		<center>Example 2 <small>javascript disabled</small></center>
-		<br />
-		<div class="menu-container">
-			<ul class="memu">
-				<li class="memu-root">
-					<a href="#">File</a>
-					<ul>
-						<li class="has-children">
-							<a href="#"><div class="memu-icon sprite-page_white"></div>New</a>
-							<ul>
-								<li><a href="#"><div class="memu-icon sprite-page_white"></div>Text Document</a></li>
-								<li><a href="#"><div class="memu-icon sprite-script_code"></div>HTML Document</a></li>
-								<li><a href="#"><div class="memu-icon sprite-script_palette"></div>CSS Document</a></li>
-								<li><a href="#"><div class="memu-icon sprite-script"></div>JS Document</a></li>
-								<li><a href="#"><div class="memu-icon sprite-page_white_c"></div>C Document</a></li>
-							</ul>
-						</li>
-						<li><a href="#"><div class="memu-icon sprite-folder"></div>Open...</a></li>
-						<li><a href="#"><div class="memu-icon sprite-disk"></div>Save</a></li>
-						<li><a href="#"><div class="memu-icon sprite-disk_multiple"></div>Save As...</a></li>
-						<li><a href="#"><div class="memu-icon sprite-page_white_edit"></div>Page Setup...</a></li>
-						<li><a href="#"><div class="memu-icon sprite-printer"></div>Print</a></li>
-						<li><a href="#"><div class="memu-icon sprite-delete"></div>Exit</a></li>
-					</ul>
-				</li>
-				<li class="memu-root">
-					<a href="#">Edit</a>
-					<ul>
-						<li><a href="#">Undo</a></li>
-						<li><a href="#">Cut</a></li>
-						<li><a href="#">Copy</a></li>
-						<li><a href="#">Paste</a></li>
-						<li><a href="#">Delete</a></li>
-						<li><a href="#">Find...</a></li>
-						<li><a href="#">Find Next</a></li>
-						<li><a href="#">Replace...</a></li>
-						<li><a href="#">Go To...</a></li>
-						<li><a href="#">Select All</a></li>
-						<li><a href="#">Time/Date</a></li>
-						<li class="has-children">
-							<a href="#">Preferences</a>
-							<ul>
-								<li class="has-children">
-									<a href="#">Text Color</a>
-									<ul>
-										<li><a href="#">Blue</a></li>
-										<li><a href="#">Red</a></li>
-										<li><a href="#">Green</a></li>
-										<li><a href="#">Brown</a></li>
-										<li><a href="#">Orange</a></li>
-									</ul>
-								</li>
-								<li class="has-children">
-									<a href="#">Background</a>
-									<ul>
-										<li><a href="#">Blue</a></li>
-										<li><a href="#">Red</a></li>
-										<li><a href="#">Green</a></li>
-										<li><a href="#">Brown</a></li>
-										<li><a href="#">Orange</a></li>
-									</ul>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</li>
-				<li class="memu-root">
-					<a href="#">Format</a>
-					<ul>
-						<li><a href="#">Word Wrap</a></li>
-						<li><a href="#">Font...</a></li>
-					</ul>
-				</li>
-				<li class="memu-root">
-					<a href="#">View</a>
-					<ul>
-						<li><a href="#">Status Bar</a></li>
-					</ul>
-				</li>
-			</ul>
-			<img src="background.jpg" alt="Background" />
-		</div>
-		<br>
-		<br>
-		<center>How-To <small>add css</small></center>
-		<div class="container">
-			<pre>
-.memu {
-	list-style: none outside none;
-	margin: 0;
-	padding: 0;
-}
-
-.memu ul {
-	list-style: none outside none;
-	margin: 0;
-	padding: 0;
-	position: absolute;
-	left: -9999px;
-	margin-left: 20px;
-	width: 150px;
-	
-	-moz-box-shadow: 3px 2px 3px #333;
-	-webkit-box-shadow: 3px 2px 3px #333;
-	box-shadow: 3px 2px 3px #333;
-}
-.memu ul ul {
-	margin-left: 0px;
-	margin-top: 0px;
-	
-}
-.memu a {
-	background: #fff;
-	background-color: rgba(255, 255, 255, 0.98);
-	border: 1px solid #f7f7f7;
-	color: #333;
-	display: block;
-	font: bold 12px/25px segoe ui,verdana,sans-serif;
-	margin: 0 -1px -1px 0;
-	padding-left: 10px;
-	text-decoration: none;
-	width: 139px;
-	text-overflow: ellipsis;
-}
-
-.memu .memu-icon {
-	position: relative;
-	width: 16px; 
-	height: 16px; 
-	margin: 4px 10px 0px 0px;
-	float: left;
-}
-
-.memu li.memu-root > a {
-	border-left: 0 !important;
-	border-right: 0 !important;
-	border-top: 1px solid transparent !important;
-	border-bottom: 1px solid transparent !important;
-	background: transparent !important;
-}
-
-.memu li {
-	float: left;
-}
-.memu li.has-children > a {
-	background: url("arrow.png") no-repeat scroll #fff;
-	background-position: 130px center;
-	background-color: rgba(255, 255, 255, 0.98);
-}
-.memu li:hover {
-	position: relative;
-	z-index: 100;
-}
-.memu li:hover > a {
-	background-color: #fff;
-	border-color: #fafafa;
-	color: #56789A;
-}
-.memu li:hover > ul {
-	left: -20px;
-	opacity: 1;
-	top: 26px;
-	z-index: -1;
-}
-.memu li:hover li:hover > ul {
-	left: 150px;
-	opacity: 1;
-	top: 0px;
-	z-index: 100;
-}
-
-.memu-current {
-	background-color: #abcdef !important;
-	background-color: rgba(235, 245, 255, 0.98 !important);
-}
-			</pre>
-			<br />
-			Thanks to <a href="http://www.cssplay.co.uk/menus/final_drop.html">cssplay.co.uk</a>
-		</div>
-		<br />
-		<center>How To <small>add js</small></center>
-		<div class="container">
-			<pre>
-$('.js-enabled').memu({ 
-	icon: {
-		inset: true,		// create an inset where there is no icon
-		margin: {		// specify the margins of the icon (put them how it's right for you
-			top: 4,
-			right: 10
-		}
-	},
-	width: 150,			// the width of the (drop down) items
-	rootWidth: 75,			// the width of the (root) items
-	height: 25			// the height of the items
-});
-			</pre>
-			<br />
-			Thanks to <a href="http://www.jstorage.info">jstorage.info</a>
-		</div>
-		<br />
-		<center>Download <small>here</small></center>
-		<div class="container">
-			<a href="http://www.codebrewery.ch/Memu/memu.zip">Download it here</a>
-			<br />
-			<a href="http://www.codebrewery.ch/Memu/jquery.memu-0.1.min.js">Compressed JS only</a>
-			<br />
-			<a href="http://www.codebrewery.ch/Memu/memu-0.1.css">Css only</a>
-		</div>
-		<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-		
-		<script type="text/javascript">
+	<body onload="init()" style="margin:0"> 
+        <div class="menu-container">
+	    <ul class="memu js-enabled">
+	      <li class="memu-root">
+		<a href="#">Tool</a>
+		<ul> 
+		  <li><a href="#" id="pen">Pen</a></li>
+		  <li><a href="#" id="erase">Erase</a></li>
+		</ul>
+	      </li>
+	      <li class="memu-root">
+		<a href="#">Color</a>
+		<ul> 
+		  <li><a href="#" id="black">Black</a></li>
+		  <li><a href="#" id="red">Red</a></li>
+		  <li><a href="#" id="blue">Blue</a><li>
+		  <li><a href="#" id="green">Green</a><li>
+		</ul>
+	      </li>
+	      <li class="memu-root">
+		<a href="#">Width</a>
+		<ul> 
+		  <li><a href="#">Fine</a></li>
+		  <li><a href="#">Medium</a></li>
+		  <li><a href="#">Thick</a><li>
+		</ul>
+	      </li>
+	      <li class="memu-root">
+		<a href="#">Action</a>
+		<ul> 
+		  <li id="save"><a href="#">Save</a></li>
+		  <li id="clear"><a href="#">Clear</a></li>
+		</ul>
+	      </li>
+	    </ul>
+            <canvas id="tutorial"  layoutAlign="center" width="100%" height="100%"> </canvas>  
+	  </div> 
+          <center> <img id="canvasImg" alt="Right click to save me!"/></center>
+	  <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	  <script type="text/javascript">
 		  google.load("jquery", "1.4.4");
 		  google.setOnLoadCallback(function() {
 			$('.js-enabled').memu({ 
@@ -1347,7 +1090,9 @@ $('.js-enabled').memu({
 				height: 25
 			});
 		  });
-		</script>
-		<script type="text/javascript" src="jquery.memu-0.1.min.js"></script>
-	</body>
+	  </script>
+	  <script type="text/javascript" src="jquery.memu-0.1.min.js"></script>
+          <script type="text/javascript" src="canvas.js" ></script>
+
+        </body>
 </html>
