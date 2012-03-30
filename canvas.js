@@ -178,9 +178,22 @@ function draw() {
 
 function save() { 
     var canvas = document.getElementById('tutorial');
-    var dataURL = canvas.toDataURL(); 
+    var dataURL = canvas.toDataURL("image/png"); 
+    console.log(dataURL);
     document.getElementById("canvasImg").src = dataURL;
+    $.ajax({ type : 'POST', 
+             url : 'http://susy.physics.lsa.umich.edu:7500/uploadwebcanvas',
+             img : dataURL
+           }, 
+           function(data) {});
+
+//    $.post('http://susy.physics.lsa.umich.edu:7500/uploadwebcanvas', 
+//           { 
+//             img : canvas.toDataURL("image/png")
+//           }, 
+//           function(data) {});
 }
+
 
 function clear() { 
     var canvas = document.getElementById('tutorial'); 
