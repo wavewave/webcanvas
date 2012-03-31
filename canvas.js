@@ -213,9 +213,15 @@ function ev_mousedown(ev) {
     console.log(getSize(canvas)) ;
 
     if (canvas.getContext) { 
-	var ctx = canvas.getContext('2d'); 
-        ctx.beginPath(); 
-	ctx.moveTo(x,y) ;  
+      var ctx = canvas.getContext('2d'); 
+      if( tools_mode == "pen") { 
+         ctx.beginPath(); 
+         ctx.moveTo(x,y) ;
+      }
+      else if( tools_mode == "erase") {
+         ctx.fillStyle="rgb(255,255,255)"; 
+         ctx.fillRect(x-5,y-5,10,10);          
+      }  
     }
 }
 
@@ -228,10 +234,16 @@ function ev_mousemove(ev) {
 	//	console.log(x,y);
 	var canvas = document.getElementById('tutorial'); 
 	if (canvas.getContext) { 
-	    var ctx = canvas.getContext('2d'); 
+	  var ctx = canvas.getContext('2d');
+          if( tools_mode == "pen" ) { 
             ctx.strokeStyle = color_rgb; 
 	    ctx.lineTo(x,y) ;  
-	    ctx.stroke(); 	    
+	    ctx.stroke();
+          }
+          else if( tools_mode == "erase" ) {
+            ctx.fillStyle="rgb(255,255,255)"; 
+            ctx.fillRect(x-5,y-5,10,10);          
+          }    	    
 	}
     }
 }
