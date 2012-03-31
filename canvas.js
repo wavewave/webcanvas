@@ -9,6 +9,7 @@ var tools_mode = "pen"; // 0 SELECT
 
 var color_mode = "black";
 var color_rgb = "rgb(0,0,0)";
+var line_width = 1 ;
 
 //window.onload = 
 window.onresize = function () { 
@@ -69,7 +70,17 @@ function color_blue() {
     color_rgb = "rgb(0,0,220)";
 }
 
+function width_fine() { 
+    line_width = 1;
+}
 
+function width_medium() {
+    line_width = 3;  
+}
+
+function width_thick() {
+    line_width = 5; 
+}
 
 getPosition = function (obj) {
     var x = 0, y = 0;
@@ -134,8 +145,12 @@ function init() {
     $("#blue").click(color_blue);
     $("#red").click(color_red);
     $("#green").click(color_green);
+    $("#fine").click(width_fine);
+    $("#medium").click(width_medium);
+    $("#thick").click(width_thick);
     $("#save").click(save);
     $("#clear").click(clear);
+
     clear(); 
 
 
@@ -237,6 +252,7 @@ function ev_mousemove(ev) {
 	  var ctx = canvas.getContext('2d');
           if( tools_mode == "pen" ) { 
             ctx.strokeStyle = color_rgb; 
+            ctx.lineWidth = line_width;
 	    ctx.lineTo(x,y) ;  
 	    ctx.stroke();
           }
