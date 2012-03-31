@@ -1,20 +1,7 @@
-//dojo.require("dijit.MenuBar"); 
-//dojo.require("dijit.PopupMenuBarItem"); 
-//dojo.require("dijit.Menu"); 
-//dojo.require("dijit.MenuItem"); 
-//dojo.require("dijit.PopupMenuItem"); 
-//dojo.require("dijit.MenuSeparator"); 
-//dojo.require("dijit.CheckedMenuItem"); 
-//dojo.require("dijit.layout.ContentPane");
-//dojo.require("dijit.layout.BorderContainer");
-
 var canvasScaleX = 1;
 var canvasScaleY = 1; 
-
-
 var mousedownenter = false ; 
 //var currentstroke ; 
-
 
 var tools_mode = "pen"; // 0 SELECT 
                // 1 PEN 
@@ -126,7 +113,6 @@ getEventPosition = function (e, obj, scale) {
 
 function init() { 
     var canvas = document.getElementById('tutorial') ; 
-
     var canvasWidth = canvas.offsetWidth; 
     var canvasHeight = canvas.offsetHeight;
     console.log(canvasWidth, canvasHeight); 
@@ -181,17 +167,17 @@ function save() {
     var dataURL = canvas.toDataURL("image/png"); 
     console.log(dataURL);
     document.getElementById("canvasImg").src = dataURL;
-    $.ajax({ type : 'POST', 
-             url : 'http://susy.physics.lsa.umich.edu:7500/uploadwebcanvas',
-             img : dataURL
-           }, 
-           function(data) {});
-
-//    $.post('http://susy.physics.lsa.umich.edu:7500/uploadwebcanvas', 
-//           { 
-//             img : canvas.toDataURL("image/png")
+//    $.ajax({ type : 'POST', 
+//             url : 'http://susy.physics.lsa.umich.edu:7500/uploadwebcanvas',
+//             img : dataURL
 //           }, 
 //           function(data) {});
+
+    $.post('http://susy.physics.lsa.umich.edu:7500/uploadwebcanvas', 
+           { 
+             img : canvas.toDataURL("image/png")
+           }, 
+           function(data) {});
 }
 
 
