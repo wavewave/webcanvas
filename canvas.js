@@ -176,6 +176,7 @@ function colorpick()
       color_mode = "gen";
       color_rgb = col;
     }
+    return false; 
 }
 
 
