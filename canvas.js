@@ -123,6 +123,19 @@ getEventPosition = function (e, obj, scale) {
 };
 
 function init() { 
+    $('.js-enabled').memu({ 
+				icon: {
+			  		inset: true,
+					margin: {
+						top: 4,
+						right: 10
+					}
+				},
+				width: 150,
+				rootWidth: 75,
+				height: 25
+			  });
+
     var canvas = document.getElementById('tutorial') ; 
     var canvasWidth = canvas.offsetWidth; 
     var canvasHeight = canvas.offsetHeight;
@@ -150,32 +163,21 @@ function init() {
     $("#thick").click(width_thick);
     $("#save").click(save);
     $("#clear").click(clear);
-
+    $("#colorpickbtn").click(colorpick); 
     clear(); 
 
-
+    $("#colorpickerField1").colorpicker({});
 }
 
-/*
-function draw() {
-    console.log('draw event fired'); 
-
-    var canvas = document.getElementById('tutorial'); 
-    if (canvas.getContext) { 
-	var ctx = canvas.getContext('2d'); 
-	
-	// ctx.fillStyle="rgb(200,0,0)"; 
-	// ctx.fillRect (10,10,55,50);
-	
-	// ctx.fillStyle ="rgba(0,0,200,0.5)";
-	// ctx.fillRect (30,30,55,50);
-
-	// ctx.fillStyle ="rgba(0,200,200,0.5)";
-	// ctx.fillRect (50,40,55,50);
-
+function colorpick() 
+{
+    var col=$("#colorpickerField1").val();
+    if (col != null) {
+      color_mode = "gen";
+      color_rgb = col;
     }
 }
-*/
+
 
 function save() { 
     var canvas = document.getElementById('tutorial');

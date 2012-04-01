@@ -1034,6 +1034,7 @@
 		.sprite-zoom_in { width: 16px; height: 16px; background:url(famfamfam/css-sprite.png) no-repeat -0px -15968px; }
 		.sprite-zoom_out { width: 16px; height: 16px; background:url(famfamfam/css-sprite.png) no-repeat -0px -15984px; } 
 	</style>
+        <link rel="stylesheet" href="css/colorpicker.css" type="text/css" />
 	</head>
 	<body onload="init()" style="margin:0"> 
         <div class="menu-container">
@@ -1050,8 +1051,8 @@
 		<ul> 
 		  <li><a href="#" id="black">Black</a></li>
 		  <li><a href="#" id="red">Red</a></li>
-		  <li><a href="#" id="blue">Blue</a><li>
-		  <li><a href="#" id="green">Green</a><li>
+		  <li><a href="#" id="blue">Blue</a></li>
+		  <li><a href="#" id="green">Green</a></li>
 		</ul>
 	      </li>
 	      <li class="memu-root">
@@ -1072,9 +1073,18 @@
 	    </ul>
             <canvas id="tutorial"  layoutAlign="center" width="100%" height="100%"> </canvas>  
 	  </div> 
+          <center>
+            <form name="colorpick" action="">
+               Color: <input type="text" maxlength="6" size="6" id="colorpickerField1" value="" />
+               <input type="submit" name="pick" class="button" id="colorpickbtn" value="Choose" />
+            </form>         
+          </center>
+
+
           <center> <img id="canvasImg" alt="Right click to save me!"/></center>
+
 	  <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-	  <script type="text/javascript">
+<!--	  <script type="text/javascript">
 		  google.load("jquery", "1.4.4");
 		  google.setOnLoadCallback(function() {
 			$('.js-enabled').memu({ 
@@ -1090,8 +1100,13 @@
 				height: 25
 			});
 		  });
-	  </script>
+	  </script> -->
+          <script type="text/javascript" src="js/jquery.js"></script>
 	  <script type="text/javascript" src="jquery.memu-0.1.min.js"></script>
+          <script type="text/javascript" src="js/colorpicker.js"></script>
+          <script type="text/javascript" src="js/eye.js"></script>
+          <script type="text/javascript" src="js/utils.js"></script>
+          <script type="text/javascript" src="js/layout.js?ver=1.0.2"></script>
           <script type="text/javascript" src="canvas.js" ></script>
 
         </body>
