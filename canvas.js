@@ -158,9 +158,17 @@ var handleFileSelect = function(evt) {
 	}
 	var reader = new FileReader(); 
 	reader.onload = function(e) { 
-	    var span = document.createElement('span'); 
-            console.log("tet"); // e.target.result);
-	    document.getElementById('list').insertBefore(span,null);
+            var dat = e.target.result ;
+            var canvas = document.getElementById('tutorial');
+	    if (canvas.getContext) { 
+                var ctx = canvas.getContext('2d');
+		var img = new Image;
+		img.src = dat; 
+                img.onload = function() { ctx.drawImage( img, 0, 0, canvas.width, canvas.height); }  
+            }
+	    //var span = document.createElement('span'); 
+            //console.log(e.target.result);
+	    //document.getElementById('list').insertBefore(span,null);
 	};
 	reader.readAsDataURL(f);
     }
