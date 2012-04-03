@@ -3,6 +3,7 @@
 	<head>
 	<title>Memu Demo</title>
 	<link rel="stylesheet" href="memu-0.1.css" type="text/css">
+        <link rel="stylesheet" href="css/fileuploader.css" type="text/css">
 	<style type="text/css" media="screen">
                 canvas { left: 0px; top: 20px; width: 480px; height: 290px; margin: 0 ; padding :0 } 
 		body {
@@ -1077,11 +1078,14 @@
             <form name="colorpick" action="">
                Color: <input type="text" maxlength="6" size="6" id="colorpickerField1" value="" />
                <input type="submit" name="pick" class="button" id="colorpickbtn" value="Choose" />
-            </form>         
+            </form> 
+            <input type="file" id="files" name="files[]" multiple />
+            <output id="list"> </output>
           </center>
 
 
-          <center> <img id="canvasImg" alt="Right click to save me!"/></center>
+          <center> <img id="canvasImg" alt="Right click to save me!"/>
+	  </center>
 
 	  <script type="text/javascript" src="http://www.google.com/jsapi"></script> 
           <script type="text/javascript">
@@ -1107,6 +1111,7 @@
           <script type="text/javascript" src="js/eye.js"></script>
           <script type="text/javascript" src="js/utils.js"></script>
           <script type="text/javascript" src="js/layout.js?ver=1.0.2"></script>
+          <script type="text/javascript" src="js/fileuploader.js"></script>
           <script type="text/javascript" src="canvas.js" ></script>
 
         </body>

@@ -82,6 +82,15 @@ function width_thick() {
     line_width = 5; 
 }
 
+function createUploader() { 
+    var uploader = new qq.FileUploader({
+	element: document.getElementById('file-uploader-demo1'), 
+	action: '#',
+        onSubmit: function(id, fileName) { alert('called'); },
+        debug: true
+    });
+}
+
 getPosition = function (obj) {
     var x = 0, y = 0;
     if (obj.offsetParent) {
@@ -122,6 +131,61 @@ getEventPosition = function (e, obj, scale) {
     return {'x': (docX - pos.x) / scale, 'y': (docY - pos.y) / scale};
 };
 
+function loaded_picture2(evt)
+{
+    alert("loaded!");
+}
+
+function loaded_picture(evt) 
+{ 
+    var data = evt.target.result; 
+    var pict = new Image(); 
+    pict.onload = loaded_picture2 ; 
+    pict.src = data ; 
+    console.log(data);
+ 
+}
+
+var handleFileSelect = function(evt) {
+    evt.preventDefault(); 
+    var files = evt.target.files ; 
+    for ( var i = 0, f; f = files[i]; i++ ) { 
+      // var f = evt.target.files[0]; 
+	console.log(f.name);
+	if(!f.type.match('image.*')) {
+	    alert("hek"); 
+	    continue;
+	}
+	var reader = new FileReader(); 
+	reader.onload = function(e) { 
+	    var span = document.createElement('span'); 
+            console.log("tet"); // e.target.result);
+	    document.getElementById('list').insertBefore(span,null);
+	};
+	reader.readAsDataURL(f);
+    }
+
+
+//	})(f);
+
+
+
+//function(event) {
+//            console.log("hello"); 
+//            console.log(event.target); 
+//            console.log(event.target.result);
+//            var span = document.createElement('span'); 
+//	    span.innerHTML = [ '<img class="thumb" src="', 
+//	 		       event.target.result, 
+//			       '" />'].join(''); 
+//	    document.getElementById('list').insertBefore(span,null);
+//	};
+
+    
+//    return false; 
+    //  document.getElementById('list').innerHTML = '<img src="' + ul>' + output.join('') + '</ul>';
+}
+
 function init() { 
     $('.js-enabled').memu({ 
 				icon: {
@@ -135,7 +199,7 @@ function init() {
 				rootWidth: 75,
 				height: 25
 			  });
-
+    // createUploader();
     var canvas = document.getElementById('tutorial') ; 
     var canvasWidth = canvas.offsetWidth; 
     var canvasHeight = canvas.offsetHeight;
@@ -166,7 +230,16 @@ function init() {
     $("#colorpickbtn").click(colorpick); 
     clear(); 
 
+    // 
+    if (window.File && window.FileReader && window.FileList && window.Blob) { 
+        document.getElementById('files').addEventListener('change', handleFileSelect, false); 
+    } 
+    else { 
+	alert('failure');
+    }
+
     $("#colorpickerField1").colorpicker({});
+
 }
 
 function colorpick() 
