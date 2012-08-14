@@ -166,32 +166,9 @@ var handleFileSelect = function(evt) {
 		img.src = dat; 
                 img.onload = function() { ctx.drawImage( img, 0, 0, canvas.width, canvas.height); }  
             }
-	    //var span = document.createElement('span'); 
-            //console.log(e.target.result);
-	    //document.getElementById('list').insertBefore(span,null);
 	};
 	reader.readAsDataURL(f);
     }
-
-
-//	})(f);
-
-
-
-//function(event) {
-//            console.log("hello"); 
-//            console.log(event.target); 
-//            console.log(event.target.result);
-//            var span = document.createElement('span'); 
-//	    span.innerHTML = [ '<img class="thumb" src="', 
-//	 		       event.target.result, 
-//			       '" />'].join(''); 
-//	    document.getElementById('list').insertBefore(span,null);
-//	};
-
-    
-//    return false; 
-    //  document.getElementById('list').innerHTML = '<img src="' + ul>' + output.join('') + '</ul>';
 }
 
 function init() { 
@@ -207,16 +184,13 @@ function init() {
 				rootWidth: 75,
 				height: 25
 			  });
-    // createUploader();
     var canvas = document.getElementById('tutorial') ; 
     var canvasWidth = canvas.offsetWidth; 
     var canvasHeight = canvas.offsetHeight;
     console.log(canvasWidth, canvasHeight); 
 
-    //    el.style.position = "fixed";
     canvas.setAttribute("width", canvasWidth);
     canvas.setAttribute("height", canvasHeight);
-    //    el.style.top = 0 ; //(viewportHeight - canvasHeight) / 2;
 
     canvas.onselectstart = function() { return false; }
     canvas.addEventListener('mousedown',ev_mousedown,false); 
@@ -266,13 +240,8 @@ function save() {
     var dataURL = canvas.toDataURL("image/png"); 
     console.log(dataURL);
     document.getElementById("canvasImg").src = dataURL;
-//    $.ajax({ type : 'POST', 
-//             url : 'http://susy.physics.lsa.umich.edu:7500/uploadwebcanvas',
-//             img : dataURL
-//           }, 
-//           function(data) {});
 
-    $.post('http://susy.physics.lsa.umich.edu:7500/uploadwebcanvas', 
+    $.post('http://localhost:7500/uploadwebcanvas', 
            { 
              img : canvas.toDataURL("image/png")
            }, 
@@ -284,7 +253,6 @@ function clear() {
     var canvas = document.getElementById('tutorial'); 
     if (canvas.getContext) { 
       var ctx = canvas.getContext('2d');
-      // var siz = getSize(canvas); 
       ctx.fillStyle="rgb(255,255,255)";
       console.log(canvas.width);
       console.log(canvas.height);
@@ -303,9 +271,6 @@ function ev_mousedown(ev) {
     y = eventpos.y ;
 
     mousedownenter = true ; 
-
-    //    console.log(x,y);
-    //    console.log('mouse button down');
 
     var canvas = document.getElementById('tutorial'); 
 
@@ -330,7 +295,6 @@ function ev_mousemove(ev) {
 	x = eventpos.x ; 
 	y = eventpos.y ;
 	
-	//	console.log(x,y);
 	var canvas = document.getElementById('tutorial'); 
 	if (canvas.getContext) { 
 	  var ctx = canvas.getContext('2d');
@@ -354,7 +318,4 @@ function ev_mouseup(ev) {
     y = eventpos.y ;
 
     mousedownenter = false ;
-
-    //    console.log(x,y);
-    //    console.log('mouse button up'); 
 } 

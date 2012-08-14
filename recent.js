@@ -1,5 +1,5 @@
 $(function() { 
-    var url = "http://susy.physics.lsa.umich.edu:7500/listwebcanvas"; 
+    var url = "http://localhost:7500/listwebcanvas"; 
     var params = { format : 'json' }; 
     $.getJSON( url, params, callback ); 
       
@@ -16,7 +16,7 @@ function callback( json ) {
         console.log(str);
 	//str = i; 
         console.log(n.uuid);
-        var url = "http://susy.physics.lsa.umich.edu:7500/webcanvas/" + n.uuid
+        var url = "http://localhost:7500/webcanvas/" + n.uuid
         var params = { format : 'json' };
         $.getJSON( url, params, function(json) { imgcallback(i,json) } );          
     });
